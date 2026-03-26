@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1D8F71E52F7592F00066C4C7 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 1D8F71E42F7592F00066C4C7 /* Factory */; };
+		1D8F71E72F7592F00066C4C7 /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1D8F71E62F7592F00066C4C7 /* FactoryKit */; };
+		1D8F71E92F7592F00066C4C7 /* FactoryTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1D8F71E82F7592F00066C4C7 /* FactoryTesting */; };
+		1D8F71EC2F7593000066C4C7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1D8F71EB2F7593000066C4C7 /* Alamofire */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		1D8F70FC2F7591DD0066C4C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +59,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D8F71EC2F7593000066C4C7 /* Alamofire in Frameworks */,
+				1D8F71E72F7592F00066C4C7 /* FactoryKit in Frameworks */,
+				1D8F71E52F7592F00066C4C7 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D8F71E92F7592F00066C4C7 /* FactoryTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +123,9 @@
 			);
 			name = SwiftStarter;
 			packageProductDependencies = (
+				1D8F71E42F7592F00066C4C7 /* Factory */,
+				1D8F71E62F7592F00066C4C7 /* FactoryKit */,
+				1D8F71EB2F7593000066C4C7 /* Alamofire */,
 			);
 			productName = SwiftStarter;
 			productReference = 1D8F70EE2F7591DC0066C4C7 /* SwiftStarter.app */;
@@ -135,6 +149,7 @@
 			);
 			name = SwiftStarterTests;
 			packageProductDependencies = (
+				1D8F71E82F7592F00066C4C7 /* FactoryTesting */,
 			);
 			productName = SwiftStarterTests;
 			productReference = 1D8F70FB2F7591DD0066C4C7 /* SwiftStarterTests.xctest */;
@@ -195,6 +210,10 @@
 			);
 			mainGroup = 1D8F70E52F7591DC0066C4C7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1D8F71E32F7592F00066C4C7 /* XCRemoteSwiftPackageReference "Factory" */,
+				1D8F71EA2F7593000066C4C7 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1D8F70EF2F7591DC0066C4C7 /* Products */;
 			projectDirPath = "";
@@ -578,6 +597,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1D8F71E32F7592F00066C4C7 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.3;
+			};
+		};
+		1D8F71EA2F7593000066C4C7 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D8F71E42F7592F00066C4C7 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D8F71E32F7592F00066C4C7 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+		1D8F71E62F7592F00066C4C7 /* FactoryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D8F71E32F7592F00066C4C7 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryKit;
+		};
+		1D8F71E82F7592F00066C4C7 /* FactoryTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D8F71E32F7592F00066C4C7 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryTesting;
+		};
+		1D8F71EB2F7593000066C4C7 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D8F71EA2F7593000066C4C7 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1D8F70E62F7591DC0066C4C7 /* Project object */;
 }
