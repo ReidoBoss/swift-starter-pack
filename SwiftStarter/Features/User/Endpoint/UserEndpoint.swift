@@ -1,5 +1,5 @@
 //
-//  ExampleEndpoint.swift
+//  UserEndpoint.swift
 //  AsaTa
 //
 //  Created by Stephen Sagarino on 3/26/26.
@@ -8,7 +8,7 @@
 import Alamofire
 import Foundation
 
-enum ExampleEndpoint: Endpoint {
+enum UserEndpoint: Endpoint {
 
     case fetchProfile(id: String)
 
@@ -17,7 +17,6 @@ enum ExampleEndpoint: Endpoint {
     var path: String {
         switch self {
         case .fetchProfile(let id): return "/users/\(id)"
-
         }
     }
 

@@ -43,7 +43,7 @@ extension Container {
     // MARK: - APIClient
 
     /// The app-wide `APIClientProtocol` implementation.
-    var apiClient: Factory<any APIClientProtocol> {
+    var apiClient: Factory<APIClientProtocol> {
         self { @MainActor in
             AlamofireAPIClient(
                 baseURL: self.apiBaseURL(),
@@ -53,13 +53,4 @@ extension Container {
         .singleton
     }
 
-    //    // MARK: - Services
-    //
-    //    /// Youth Profile service. Scoped to `.shared` so all consumers share one instance.
-    //    var youthProfileService: Factory<any YouthProfileServiceProtocol> {
-    //        self {
-    //            YouthProfileService(client: self.apiClient())
-    //        }
-    //        .shared
-    //    }
 }
