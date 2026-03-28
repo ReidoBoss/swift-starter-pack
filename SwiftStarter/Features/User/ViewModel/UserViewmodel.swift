@@ -15,18 +15,19 @@ final class UserViewmodel {
     private(set) var errorMessage: String?
 
     // MARK: - Dependencies
-    private let userService: UserServiceProtocol
+    private let findUserUsecase: FindUserUsecase
 
     // MARK: - Init
-    init(userService: UserServiceProtocol) {
-        self.userService = userService
+    init(findUserUsecase: FindUserUsecase) {
+        self.findUserUsecase = findUserUsecase
     }
 
+    // MARK: - Methods
     func loadUser(id: String) async {
         isLoading = true
         errorMessage = nil
         do {
-            currentUser = try await userService.fetchProfile(id: id)
+            currentUser = try await findUserUsecase.execute(id: id)
         } catch let error as APIError {
             errorMessage = error.errorDescription
         } catch {
