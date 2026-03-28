@@ -23,7 +23,6 @@ enum UserEndpoint: Endpoint {
     var method: HTTPMethod {
         switch self {
         case .fetchProfile: return .get
-
         }
     }
 
@@ -36,7 +35,6 @@ enum UserEndpoint: Endpoint {
 
     var encoding: ParameterEncoding {
         switch self {
-        //        case .updateProfile: return JSONEncoding.default
         default: return URLEncoding.default
         }
     }

@@ -7,8 +7,7 @@
 
 import Foundation
 
-/// Decoded response model for a single Youth Profile record.
-nonisolated struct User: Decodable, Identifiable {
+struct User {
     let id: String
     let fullName: String
 }

@@ -8,7 +8,7 @@
 // MARK: - Protocol
 
 protocol UserServiceProtocol {
-    func fetchProfile(id: String) async throws -> User
+    func fetchProfile(id: String) async throws -> UserDTO
 }
 
 // MARK: - Implementation
@@ -27,10 +27,10 @@ final class UserService: UserServiceProtocol {
 
     // MARK: - ExampleModelServiceProtocol
 
-    func fetchProfile(id: String) async throws -> User {
+    func fetchProfile(id: String) async throws -> UserDTO {
         try await client.request(
             UserEndpoint.fetchProfile(id: id),
-            as: User.self
+            as: UserDTO.self
         )
     }
 }

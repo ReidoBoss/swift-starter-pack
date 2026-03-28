@@ -16,6 +16,6 @@ struct UserRepositoryImpl: UserRepository {
     private let userService: UserServiceProtocol
 
     func fetchProfile(id: String) async throws -> User {
-        try await userService.fetchProfile(id: id)
+        try await userService.fetchProfile(id: id).toDomain()
     }
 }

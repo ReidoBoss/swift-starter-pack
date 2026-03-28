@@ -27,7 +27,9 @@ final class UserViewmodel {
         isLoading = true
         errorMessage = nil
         do {
-            currentUser = try await findUserUsecase.execute(id: id)
+            currentUser =
+                try await findUserUsecase
+                .execute(id: id)
         } catch let error as APIError {
             errorMessage = error.errorDescription
         } catch {
