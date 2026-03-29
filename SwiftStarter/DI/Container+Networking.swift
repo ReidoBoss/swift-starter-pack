@@ -20,9 +20,9 @@ extension Container {
         self {
             #if DEBUG
                 // Use staging in debug builds
-                URL(string: "https://staging-api.skloud.ph/v1")!
+                URL(string: "https://dummyjson.com")!
             #else
-                URL(string: "https://api.skloud.ph/v1")!
+                URL(string: "https://dummyjson.com")!
             #endif
         }
         .singleton
@@ -34,8 +34,17 @@ extension Container {
     /// Swap this registration in tests to inject a mock session.
     var alamofireSession: Factory<Session> {
         self {
-            // Attach a token refresh interceptor here when auth is implemented.
-            Session.default
+            let refreshEndpoint =
+                self
+                .apiBaseURL()
+                .appendingPathComponent("/auth/refresh")
+
+            let interceptor = AuthInterceptor(
+                tokenStorage: self.authTokenStorage(),
+                refreshEndpoint: refreshEndpoint
+            )
+
+            return Session(interceptor: interceptor)
         }
         .singleton
     }

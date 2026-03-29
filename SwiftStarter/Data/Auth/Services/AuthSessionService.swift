@@ -11,6 +11,8 @@ protocol AuthSessionService {
     func create(
         _ sessionDto: CreateSessionRequestDTO
     ) async throws -> CreateSessionResponseDTO
+
+    func find() async throws -> FindAuthenticatedSessionResponseDTO
 }
 
 final class AuthSessionServiceImpl: AuthSessionService {
@@ -26,6 +28,13 @@ final class AuthSessionServiceImpl: AuthSessionService {
         try await client.request(
             SessionEndpoint.create(request: sessionDto),
             as: CreateSessionResponseDTO.self
+        )
+    }
+
+    func find() async throws -> FindAuthenticatedSessionResponseDTO {
+        try await client.request(
+            SessionEndpoint.find,
+            as: FindAuthenticatedSessionResponseDTO.self
         )
     }
 }

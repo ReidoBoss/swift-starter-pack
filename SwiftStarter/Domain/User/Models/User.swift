@@ -8,6 +8,6 @@
 import Foundation
 
 struct User {
-    let id: String
-    let fullName: String
+    let firstName: String
+    let lastName: String
 }

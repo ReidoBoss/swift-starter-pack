@@ -23,6 +23,9 @@ enum APIError: Error, LocalizedError {
     /// A response was received but the body was empty when data was expected.
     case emptyResponse
 
+    /// A response was received but the body was empty when data was expected.
+    case sessionExpired
+
     var errorDescription: String? {
         switch self {
         case .httpError(let code, _):
@@ -33,6 +36,8 @@ enum APIError: Error, LocalizedError {
             return "The request failed. Check your connection."
         case .emptyResponse:
             return "No data was returned from the server."
+        case .sessionExpired:
+            return "Your session has expired. Please log in again."
         }
     }
 }

@@ -10,29 +10,39 @@ import Foundation
 
 enum SessionEndpoint: Endpoint {
     case create(request: CreateSessionRequestDTO)
+    case find
 
     var path: String {
         switch self {
-        case .create: return "/sessions"
+        case .create: "/auth/login"
+        case .find: "/auth/me"
         }
     }
 
     var method: HTTPMethod {
         switch self {
         case .create: .post
+        case .find: .get
         }
     }
 
     var parameters: Parameters? {
         switch self {
-        case .create:
+        case .create, .find:
             return nil
         }
     }
 
     var encoding: ParameterEncoding {
         switch self {
-        case .create: URLEncoding.default
+        case .create, .find: URLEncoding.default
         }
+    }
+
+    var headers: HTTPHeaders? {
+        switch self {
+        case .create, .find: nil
+        }
+
     }
 }

@@ -8,5 +8,6 @@
 import Foundation
 
 struct AuthSession {
-    let token: String
+    let accessToken: String
+    let refreshToken: String
 }

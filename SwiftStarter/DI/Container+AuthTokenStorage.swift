@@ -11,11 +11,10 @@ import Valet
 
 extension Container {
 
-    var authTokenStorage: Factory<TokenStorage> {
+    var authTokenStorage: Factory<AuthTokenStorage> {
         self { @MainActor in
-            SessionTokenStorage(
-                identifier: .init(nonEmpty: "authTokenStorage")!,
-                key: "authAccessToken"
+            AuthTokenStorageImpl(
+                identifier: .init(nonEmpty: "authTokenStorage")!
             )
         }.shared
     }

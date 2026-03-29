@@ -11,4 +11,6 @@ protocol AuthSessionRepository {
     func create(
         _ request: CreateSessionRequestDTO
     ) async throws
+
+    func find() async throws -> User
 }

@@ -47,7 +47,7 @@ final class AlamofireAPIClient: APIClientProtocol {
     init(
         baseURL: URL,
         session: Session = .default,
-        decoder: JSONDecoder = .skDefault
+        decoder: JSONDecoder = .customDefault
     ) {
         self.baseURL = baseURL
         self.session = session
@@ -113,7 +113,7 @@ final class AlamofireAPIClient: APIClientProtocol {
 
 extension JSONDecoder {
     /// App-wide decoder: snake\_case keys, ISO8601 dates.
-    static var skDefault: JSONDecoder {
+    static var customDefault: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .iso8601

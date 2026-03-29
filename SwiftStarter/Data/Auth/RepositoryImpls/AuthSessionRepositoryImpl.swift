@@ -9,14 +9,14 @@ import Foundation
 
 final class AuthSessionRepositoryImpl: AuthSessionRepository {
     private let authSessionService: AuthSessionService
-    private let authAcesssTokenStorage: TokenStorage
+    private let authSessionStorage: AuthTokenStorage
 
     init(
         authSessionService: AuthSessionService,
-        authAcesssTokenStorage: TokenStorage
+        authSessionStorage: AuthTokenStorage
     ) {
         self.authSessionService = authSessionService
-        self.authAcesssTokenStorage = authAcesssTokenStorage
+        self.authSessionStorage = authSessionStorage
     }
 
     func create(
@@ -26,7 +26,22 @@ final class AuthSessionRepositoryImpl: AuthSessionRepository {
             try await authSessionService
             .create(request)
             .toDomain()
-        try authAcesssTokenStorage.save(token: session.token)
+
+        try authSessionStorage.save(
+            token: session.accessToken,
+            type: .access
+        )
+
+        try authSessionStorage.save(
+            token: session.refreshToken,
+            type: .refresh
+        )
+    }
+
+    func find() async throws -> User {
+        try await authSessionService
+            .find()
+            .toDomain()
     }
 
 }

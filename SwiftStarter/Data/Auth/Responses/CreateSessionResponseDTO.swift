@@ -9,9 +9,14 @@ import Foundation
 
 nonisolated struct CreateSessionResponseDTO: Decodable {
 
-    let token: String
+    let accessToken: String
+    let refreshToken: String
 
     func toDomain() -> AuthSession {
-        .init(token: token)
+        .init(
+            accessToken: accessToken,
+            refreshToken: refreshToken
+        )
     }
+
 }

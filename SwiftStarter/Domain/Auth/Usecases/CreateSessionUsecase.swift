@@ -26,11 +26,11 @@ final class CreateSessionUsecaseImpl: CreateSessionUsecase {
     func execute(
         _ input: CreateSessionInput
     ) async throws {
-        let email = input.email
-        let password = input.password
-
-        guard email.contains("@") else { throw AuthError.invalidEmail }
-        guard password.count >= 8 else { throw AuthError.weakPassword }
+        // example usage of validation logic before making the repository call
+        // let email = input.email
+        // let password = input.password
+        // guard email.contains("@") else { throw AuthError.invalidEmail }
+        // guard password.count >= 8 else { throw AuthError.weakPassword }
 
         try await authSessionRepository.create(input.toDTO())
     }
