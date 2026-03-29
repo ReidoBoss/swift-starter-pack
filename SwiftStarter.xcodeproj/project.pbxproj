@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D5BC1F42F78DBE20017B922 /* Valet in Frameworks */ = {isa = PBXBuildFile; productRef = 1D5BC1F32F78DBE20017B922 /* Valet */; };
 		1D8F72232F7594C40066C4C7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1D8F72222F7594C40066C4C7 /* Alamofire */; };
 		1D8F72262F7594D20066C4C7 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 1D8F72252F7594D20066C4C7 /* Factory */; };
 		1D8F72282F7594D20066C4C7 /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1D8F72272F7594D20066C4C7 /* FactoryKit */; };
@@ -60,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D8F72282F7594D20066C4C7 /* FactoryKit in Frameworks */,
+				1D5BC1F42F78DBE20017B922 /* Valet in Frameworks */,
 				1D8F72232F7594C40066C4C7 /* Alamofire in Frameworks */,
 				1D8F72262F7594D20066C4C7 /* Factory in Frameworks */,
 			);
@@ -126,6 +128,7 @@
 				1D8F72222F7594C40066C4C7 /* Alamofire */,
 				1D8F72252F7594D20066C4C7 /* Factory */,
 				1D8F72272F7594D20066C4C7 /* FactoryKit */,
+				1D5BC1F32F78DBE20017B922 /* Valet */,
 			);
 			productName = SwiftStarter;
 			productReference = 1D8F70EE2F7591DC0066C4C7 /* SwiftStarter.app */;
@@ -213,6 +216,7 @@
 			packageReferences = (
 				1D8F72212F7594C40066C4C7 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				1D8F72242F7594D20066C4C7 /* XCRemoteSwiftPackageReference "Factory" */,
+				1D5BC1F22F78DBE20017B922 /* XCRemoteSwiftPackageReference "Valet" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1D8F70EF2F7591DC0066C4C7 /* Products */;
@@ -599,6 +603,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1D5BC1F22F78DBE20017B922 /* XCRemoteSwiftPackageReference "Valet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/square/Valet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
 		1D8F72212F7594C40066C4C7 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -618,6 +630,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1D5BC1F32F78DBE20017B922 /* Valet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D5BC1F22F78DBE20017B922 /* XCRemoteSwiftPackageReference "Valet" */;
+			productName = Valet;
+		};
 		1D8F72222F7594C40066C4C7 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1D8F72212F7594C40066C4C7 /* XCRemoteSwiftPackageReference "Alamofire" */;

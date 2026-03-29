@@ -11,9 +11,13 @@ protocol UserRepository {
     func fetchProfile(id: String) async throws -> User
 }
 
-struct UserRepositoryImpl: UserRepository {
+final class UserRepositoryImpl: UserRepository {
 
     private let userService: UserServiceProtocol
+
+    init(userService: UserServiceProtocol) {
+        self.userService = userService
+    }
 
     func fetchProfile(id: String) async throws -> User {
         try await userService.fetchProfile(id: id).toDomain()

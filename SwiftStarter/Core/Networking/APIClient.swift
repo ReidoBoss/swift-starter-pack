@@ -22,8 +22,7 @@ protocol APIClientProtocol {
     func request<T: Decodable & Sendable>(
         _ endpoint: any Endpoint,
         as type: T.Type
-    )
-        async throws -> T
+    ) async throws -> T
 }
 
 // MARK: - Alamofire Implementation
