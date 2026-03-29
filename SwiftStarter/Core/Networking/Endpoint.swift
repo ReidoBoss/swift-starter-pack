@@ -26,6 +26,8 @@ protocol Endpoint {
 
     /// Additional headers merged with the session's default headers.
     var headers: HTTPHeaders? { get }
+
+    var body: Encodable? { get }
 }
 
 extension Endpoint {

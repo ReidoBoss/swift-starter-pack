@@ -14,8 +14,8 @@ struct LoginView: View {
 
     // MARK: - State
 
-    @State private var username: String = ""
-    @State private var password: String = ""
+    @State private var username: String = "emilys"
+    @State private var password: String = "emilyspass"
     @State private var isPasswordVisible: Bool = false
     @FocusState private var focusedField: Field?
 
@@ -126,7 +126,7 @@ extension LoginView {
         focusedField = nil
 
         sessionViewModel
-            .create(email: username, password: password)
+            .create(username: username, password: password)
     }
 }
 

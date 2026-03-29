@@ -57,19 +57,36 @@ final class AlamofireAPIClient: APIClientProtocol {
     // MARK: - APIClientProtocol
 
     func request<T: Decodable & Sendable>(
-        _ endpoint: any Endpoint,
+        _ endpoint: Endpoint,
         as type: T.Type
     ) async throws -> T {
         let url = baseURL.appendingPathComponent(endpoint.path)
 
-        let dataTask = session.request(
-            url,
-            method: endpoint.method,
-            parameters: endpoint.parameters,
-            encoding: endpoint.encoding,
-            headers: endpoint.headers
+        // Build a URLRequest so we can attach a JSON body when present.
+        var urlRequest = URLRequest(url: url)
+        urlRequest.method = endpoint.method
+        urlRequest.headers = endpoint.headers ?? HTTPHeaders()
+
+        // If a body is provided, JSON-encode it and set Content-Type.
+
+        if let body = endpoint.body {
+            urlRequest.httpBody = try JSONEncoder().encode(body)
+            urlRequest.setValue(
+                "application/json",
+                forHTTPHeaderField: "Content-Type"
+            )
+        }
+
+        // Encode query parameters (for GET) or form body (for POST without a JSON body).
+        let encodedRequest = try endpoint.encoding.encode(
+            urlRequest,
+            with: endpoint.parameters
         )
-        .validate()  // Triggers httpError for non-2xx automatically
+
+        let dataTask =
+            session
+            .request(encodedRequest)
+            .validate()
 
         return try await withCheckedThrowingContinuation { continuation in
             dataTask.responseData { response in
@@ -88,7 +105,6 @@ final class AlamofireAPIClient: APIClientProtocol {
                     }
 
                 case .failure(let afError):
-                    // Surface HTTP status codes distinctly from transport errors.
                     if let statusCode = response.response?.statusCode {
                         continuation.resume(
                             throwing: APIError.httpError(

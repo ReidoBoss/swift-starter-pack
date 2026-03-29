@@ -8,6 +8,6 @@
 import Foundation
 
 struct CreateSessionRequestDTO: Encodable {
-    let email: String
+    let username: String
     let password: String
 }

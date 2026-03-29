@@ -43,6 +43,12 @@ enum SessionEndpoint: Endpoint {
         switch self {
         case .create, .find: nil
         }
+    }
 
+    var body: Encodable? {
+        switch self {
+        case .create(let request): request
+        case .find: nil
+        }
     }
 }

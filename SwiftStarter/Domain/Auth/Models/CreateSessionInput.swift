@@ -8,9 +8,9 @@
 import Foundation
 
 struct CreateSessionInput {
-    let email: String
+    let username: String
     let password: String
     func toDTO() -> CreateSessionRequestDTO {
-        .init(email: email, password: password)
+        .init(username: username, password: password)
     }
 }

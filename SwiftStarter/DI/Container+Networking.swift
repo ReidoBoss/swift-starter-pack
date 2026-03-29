@@ -45,6 +45,7 @@ extension Container {
             )
 
             return Session(interceptor: interceptor)
+
         }
         .singleton
     }

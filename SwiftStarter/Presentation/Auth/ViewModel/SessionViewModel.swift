@@ -25,7 +25,7 @@ final class SessionViewModel {
 
     // MARK: - Actions
 
-    func create(email: String, password: String) {
+    func create(username: String, password: String) {
         guard !isLoading else { return }
 
         Task { [weak self] in
@@ -35,7 +35,7 @@ final class SessionViewModel {
             errorMessage = nil
 
             let input = CreateSessionInput(
-                email: email,
+                username: username,
                 password: password
             )
 
@@ -45,7 +45,6 @@ final class SessionViewModel {
                 errorMessage = error.errorDescription
             } catch {
                 errorMessage = String(localized: "error.generic")
-
             }
 
             isLoading = false
