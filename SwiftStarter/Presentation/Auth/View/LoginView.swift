@@ -11,7 +11,6 @@ import SwiftUI
 struct LoginView: View {
     // MARK: - Dependencies
     @Injected(\.sessionViewModel) var sessionViewModel
-
     @Injected(\.userViewModel) var userViewModel
 
     // MARK: - State
@@ -21,12 +20,17 @@ struct LoginView: View {
     @State private var isPasswordVisible: Bool = false
     @FocusState private var focusedField: Field?
 
+    var errorMessage: String? {
+        sessionViewModel.errorMessage
+    }
+
     // MARK: - Body
 
     var body: some View {
         VStack(spacing: 24) {
             headerSection
             fieldsSection
+            errorMessageSection
             loginButton
         }
         .padding(.horizontal, 24)
@@ -39,7 +43,16 @@ struct LoginView: View {
 // MARK: - Subviews
 
 extension LoginView {
-
+    fileprivate var errorMessageSection: some View {
+        Group {
+            if let message = errorMessage {
+                Text(message)
+                    .font(.footnote)
+                    .foregroundStyle(.red)
+                    .multilineTextAlignment(.center)
+            }
+        }
+    }
     fileprivate var headerSection: some View {
         VStack(spacing: 8) {
             Text("Welcome Back")
