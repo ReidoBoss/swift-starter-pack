@@ -14,7 +14,9 @@ extension Container {
     var authTokenStorage: Factory<AuthTokenStorage> {
         self { @MainActor in
             AuthTokenStorageImpl(
-                identifier: .init(nonEmpty: "authTokenStorage")!
+                identifier: .init(
+                    nonEmpty: "com.reidoboss.SwiftStarter.AuthTokenStorage"
+                )!
             )
         }.shared
     }

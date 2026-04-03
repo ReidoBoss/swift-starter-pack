@@ -10,7 +10,7 @@ import Foundation
 protocol AuthSessionRepository {
     func create(
         _ request: CreateSessionRequestDTO
-    ) async throws
+    ) async throws -> AuthSession
 
-    func find() async throws -> User
+    func find() async throws -> User?
 }

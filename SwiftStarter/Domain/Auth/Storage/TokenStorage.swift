@@ -25,5 +25,5 @@ protocol AuthTokenStorage: Sendable {
     func delete(type: TokenType) throws
 
     /// Deletes all stored tokens. Call this on logout.
-    func deleteAll() throws
+    func clear() throws
 }

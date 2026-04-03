@@ -77,11 +77,13 @@ final class AlamofireAPIClient: APIClientProtocol {
             )
         }
 
-        // Encode query parameters (for GET) or form body (for POST without a JSON body).
-        let encodedRequest = try endpoint.encoding.encode(
-            urlRequest,
-            with: endpoint.parameters
-        )
+        let encodedRequest =
+            try endpoint
+            .encoding
+            .encode(
+                urlRequest,
+                with: endpoint.parameters
+            )
 
         let dataTask =
             session

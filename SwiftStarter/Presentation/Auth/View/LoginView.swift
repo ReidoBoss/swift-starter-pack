@@ -12,6 +12,8 @@ struct LoginView: View {
     // MARK: - Dependencies
     @Injected(\.sessionViewModel) var sessionViewModel
 
+    @Injected(\.userViewModel) var userViewModel
+
     // MARK: - State
 
     @State private var username: String = "emilys"

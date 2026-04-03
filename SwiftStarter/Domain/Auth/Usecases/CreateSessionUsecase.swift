@@ -16,22 +16,39 @@ protocol CreateSessionUsecase {
 final class CreateSessionUsecaseImpl: CreateSessionUsecase {
 
     let authSessionRepository: AuthSessionRepository
+    let authTokenStorage: AuthTokenStorage
+    let userStorage: UserStorage
 
     init(
-        authSessionRepository: AuthSessionRepository
+        authSessionRepository: AuthSessionRepository,
+        authTokenStorage: AuthTokenStorage,
+        userStorage: UserStorage
     ) {
         self.authSessionRepository = authSessionRepository
+        self.authTokenStorage = authTokenStorage
+        self.userStorage = userStorage
     }
 
     func execute(
         _ input: CreateSessionInput
     ) async throws {
-        // example usage of validation logic before making the repository call
-        // let email = input.email
-        // let password = input.password
-        // guard email.contains("@") else { throw AuthError.invalidEmail }
-        // guard password.count >= 8 else { throw AuthError.weakPassword }
 
-        try await authSessionRepository.create(input.toDTO())
+        let session = try await authSessionRepository.create(input.toDTO())
+
+        try authTokenStorage
+            .save(
+                token: session.accessToken,
+                type: .access
+            )
+
+        try authTokenStorage
+            .save(
+                token: session.refreshToken,
+                type: .refresh
+            )
+
+        userStorage
+            .save(user: session.toUser())
+
     }
 }

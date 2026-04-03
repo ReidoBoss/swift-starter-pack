@@ -38,7 +38,7 @@ final class AuthTokenStorageImpl: AuthTokenStorage {
         try valet.removeObject(forKey: type.rawValue)
     }
 
-    func deleteAll() throws {
+    func clear() throws {
         try valet.removeAllObjects()
     }
 }

@@ -12,15 +12,17 @@ extension Container {
 
     var authSessionService: Factory<AuthSessionService> {
         self { @MainActor in
-            AuthSessionServiceImpl(client: self.apiClient())
+            AuthSessionServiceImpl(
+                client: self.apiClient(),
+                authenticatedClient: self.authenticatedApiClient()
+            )
         }.shared
     }
 
     var authSessionRepository: Factory<AuthSessionRepository> {
         self { @MainActor in
             AuthSessionRepositoryImpl(
-                authSessionService: self.authSessionService(),
-                authSessionStorage: self.authTokenStorage()
+                authSessionService: self.authSessionService()
             )
         }.shared
     }
@@ -28,14 +30,28 @@ extension Container {
     var createSessionUsecase: Factory<any CreateSessionUsecase> {
         self { @MainActor in
             CreateSessionUsecaseImpl(
-                authSessionRepository: self.authSessionRepository()
+                authSessionRepository: self.authSessionRepository(),
+                authTokenStorage: self.authTokenStorage(),
+                userStorage: self.userStorage()
             )
         }.shared
     }
 
+    var deleteSessionUsecase: Factory<DeleteSessionUsecase> {
+        self { @MainActor in
+            DeleteSessionImpl(
+                authTokenStorage: self.authTokenStorage(),
+                userStorage: self.userStorage()
+            )
+        }
+    }
+
     var sessionViewModel: Factory<SessionViewModel> {
         self { @MainActor in
-            .init(createSessionUsecase: self.createSessionUsecase())
+            .init(
+                createSessionUsecase: self.createSessionUsecase(),
+                deleteSessionUsecase: self.deleteSessionUsecase()
+            )
         }.shared
     }
 

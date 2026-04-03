@@ -1,5 +1,5 @@
 //
-//  AuthSessionService.swift
+//  AuthSessionServiceImpl.swift
 //  SwiftStarter
 //
 //  Created by Stephen Sagarino on 3/29/26.
@@ -7,19 +7,16 @@
 
 import Foundation
 
-protocol AuthSessionService {
-    func create(
-        _ sessionDto: CreateSessionRequestDTO
-    ) async throws -> CreateSessionResponseDTO
-
-    func find() async throws -> FindAuthenticatedSessionResponseDTO
-}
-
 final class AuthSessionServiceImpl: AuthSessionService {
     private let client: APIClientProtocol
+    private let authenticatedClient: APIClientProtocol
 
-    init(client: APIClientProtocol) {
+    init(
+        client: APIClientProtocol,
+        authenticatedClient: APIClientProtocol
+    ) {
         self.client = client
+        self.authenticatedClient = authenticatedClient
     }
 
     func create(
@@ -32,9 +29,10 @@ final class AuthSessionServiceImpl: AuthSessionService {
     }
 
     func find() async throws -> FindAuthenticatedSessionResponseDTO {
-        try await client.request(
+        try await authenticatedClient.request(
             SessionEndpoint.find,
             as: FindAuthenticatedSessionResponseDTO.self
         )
     }
+
 }

@@ -32,7 +32,7 @@ extension Container {
 
     /// Alamofire session with auth interceptor attached.
     /// Swap this registration in tests to inject a mock session.
-    var alamofireSession: Factory<Session> {
+    var authenticatedSession: Factory<Session> {
         self {
             let refreshEndpoint =
                 self
@@ -57,7 +57,18 @@ extension Container {
         self { @MainActor in
             AlamofireAPIClient(
                 baseURL: self.apiBaseURL(),
-                session: self.alamofireSession()
+                session: .default
+            )
+        }
+        .singleton
+    }
+
+    /// The Authenticated `APIClientProtocol` implementation.
+    var authenticatedApiClient: Factory<APIClientProtocol> {
+        self { @MainActor in
+            AlamofireAPIClient(
+                baseURL: self.apiBaseURL(),
+                session: self.authenticatedSession()
             )
         }
         .singleton

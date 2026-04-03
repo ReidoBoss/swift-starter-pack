@@ -8,20 +8,26 @@
 import Foundation
 
 protocol FindAuthenticatedUserUsecase {
-    func execute() async throws -> User
+    func execute() async throws
 }
 
 final class FindAuthenticatedUserImpl: FindAuthenticatedUserUsecase {
 
     let repository: AuthSessionRepository
+    let userStorage: UserStorage
 
     init(
-        repository: AuthSessionRepository
+        repository: AuthSessionRepository,
+        userStorage: UserStorage
     ) {
         self.repository = repository
+        self.userStorage = userStorage
     }
 
-    func execute() async throws -> User {
-        try await repository.find()
+    func execute() async throws {
+        let user = try await repository.find()
+        if let user {
+            userStorage.save(user: user)
+        }
     }
 }

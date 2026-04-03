@@ -10,11 +10,22 @@ import SwiftUI
 
 struct ContentView: View {
 
-    // MARK: - Dependency Injection
-    //    @Injected(\)
+    @Injected(\.userViewModel) var userViewModel
+
+    var currentUser: User? {
+        userViewModel.currentUser
+    }
 
     var body: some View {
-        LoginView()
+        if currentUser != nil {
+            UserView()
+        } else {
+            LoginView()
+                .task {
+                    userViewModel.find()
+                }
+        }
+
     }
 }
 

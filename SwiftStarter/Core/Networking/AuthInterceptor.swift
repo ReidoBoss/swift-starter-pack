@@ -45,16 +45,15 @@ final class AuthInterceptor: RequestInterceptor, @unchecked Sendable {
         for session: Session,
         completion: @escaping (Result<URLRequest, Error>) -> Void
     ) {
-        var request = urlRequest
-
         do {
             if let token = try tokenStorage.get(type: .access) {
+                var request = urlRequest
                 request.setValue(
                     "Bearer \(token)",
                     forHTTPHeaderField: "Authorization"
                 )
+                completion(.success(request))
             }
-            completion(.success(request))
         } catch {
             completion(.failure(error))
         }
@@ -149,7 +148,7 @@ extension AuthInterceptor {
 
         } catch {
             // Refresh failed — wipe tokens and force re-login
-            try? await tokenStorage.deleteAll()
+            try? await tokenStorage.clear()
             resolvePending(shouldRetry: false)
         }
     }
